@@ -46,7 +46,6 @@ db.connect().then((client) => {
     .then((res) => {
       client.release();
       console.log(`Connected to DB DB_NAME: ${config.databasename}`);
-      console.log(`query response: ${res.rows[0].now}`);
     })
     .catch((err) => {
       client.release();

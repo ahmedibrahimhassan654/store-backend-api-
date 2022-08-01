@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
+    "migration:run": "db-migrate up",
     "build": "tsc",
     "prod": "npm run build && node dist/index.ts",
     "formate": "prettier --write src/**/*.ts",
@@ -42,6 +43,8 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-rate-limit": "^6.5.1",
