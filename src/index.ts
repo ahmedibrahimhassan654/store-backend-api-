@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import ratelimit from 'express-rate-limit';
+import errorMiddleware from './middleware/error';
 const app = express();
 
 // Load env vars
@@ -34,7 +35,13 @@ app.use(
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
+app.use(errorMiddleware);
 
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({
+    message: 'Ohh you are lost, read the API documentation to find your way back home 😂',
+  });
+});
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
