@@ -1,20 +1,19 @@
 import express, { Request, Response } from 'express';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
+
 import helmet from 'helmet';
 import ratelimit from 'express-rate-limit';
 import errorMiddleware from './middleware/error';
 import config from './middleware/config';
+import db from './DB';
 const app = express();
-
-console.log(config);
 
 // Load env vars
 
 const PORT = config.port || 3000;
 // Dev logging middleware
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('common'));
+if (process.env.NODE_ENV === 'dev') {
+  app.use(morgan('dev'));
 }
 
 //helmet middleware for security
@@ -38,6 +37,23 @@ app.use(
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
+
+//test DB
+
+db.connect().then((client) => {
+  return client
+    .query('SELECT NOW()')
+    .then((res) => {
+      client.release();
+      console.log(`Connected to DB DB_NAME: ${config.databasename}`);
+      console.log(`query response: ${res.rows[0].now}`);
+    })
+    .catch((err) => {
+      client.release();
+      console.error('DB Error', err.message);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.use((_req: Request, res: Response) => {
@@ -46,7 +62,7 @@ app.use((_req: Request, res: Response) => {
   });
 });
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Example app listening on port ${PORT} at  ${process.env.NODE_ENV} env`);
 });
 
 export default app;
