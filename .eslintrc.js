@@ -16,6 +16,12 @@ module.exports = {
     //'no-console': 1,
     'prefer-const': 'error',
     'no-var': 'error',
-    'prettier/prettier': 1,
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        parser: 'flow',
+      },
+    ],
   },
 };
