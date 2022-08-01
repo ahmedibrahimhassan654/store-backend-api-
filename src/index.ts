@@ -4,11 +4,14 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import ratelimit from 'express-rate-limit';
 import errorMiddleware from './middleware/error';
+import config from './middleware/config';
 const app = express();
 
+console.log(config);
+
 // Load env vars
-dotenv.config({ path: 'config.env' });
-const PORT = process.env.PORT || 5000;
+
+const PORT = config.port || 3000;
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('common'));
