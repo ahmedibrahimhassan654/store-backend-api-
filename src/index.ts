@@ -6,6 +6,7 @@ import ratelimit from 'express-rate-limit';
 import errorMiddleware from './middleware/error';
 import config from './middleware/config';
 import db from './DB';
+import routes from './routes';
 const app = express();
 
 // Load env vars
@@ -26,13 +27,15 @@ app.use(express.json());
 
 app.use(
   ratelimit({
-    windowMs: 60 * 1000, // 15 minutes
-    max: 2, // limit each IP to 3 requests per windowMs
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // limit each IP to 3 requests per windowMs
     message: 'Too many requests from this IP, please try again after a miniute',
     standardHeaders: true,
     legacyHeaders: false,
   })
 );
+
+app.use('/api', routes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
@@ -43,7 +46,7 @@ app.get('/', (req: Request, res: Response) => {
 db.connect().then((client) => {
   return client
     .query('SELECT NOW()')
-    .then((res) => {
+    .then(() => {
       client.release();
       console.log(`Connected to DB DB_NAME: ${config.databasename}`);
     })

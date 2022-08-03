@@ -1,11 +1,14 @@
 import { Response, Request, NextFunction } from 'express';
 import Error from '../utils/errorHandler';
 
-const errorMiddleware = (error: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log(error);
-
-  const status = error.status || 500;
-  const message = error.message || 'Whoops!! something went wrong';
+const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log('error stack', err);
+  // if (error.routine === 'ExecConstraints') {
+  //   const message = `Resource ${error.column}not found`;
+  //   error = new Error(404, message);
+  // }
+  const status = err.status || 500;
+  const message = err.message || 'Whoops!! something went wrong';
   res.status(status).json({ status, message });
   next();
 };
