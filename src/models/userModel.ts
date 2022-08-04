@@ -9,7 +9,8 @@ class UserModel {
       //open connection to database
       const client = await db.connect();
       //run query
-      const query = 'INSERT INTO users (email, first_name, last_name, password) VALUES ($1, $2, $3, $4) RETURNING *';
+      const query =
+        'INSERT INTO users (email, first_name, last_name, password) VALUES ($1, $2, $3, $4) RETURNING id,email, first_name, last_name';
       const result = await client.query(query, [user.email, user.first_name, user.last_name, user.password]);
       //close connection
       client.release();
@@ -19,6 +20,23 @@ class UserModel {
       console.log(error);
       console.log('Error creating user');
       throw new Error(`Unable to create (${user.first_name}): ${(error as Error).message}`);
+    }
+  }
+  async getAllUsers(): Promise<User[]> {
+    try {
+      //open connection to database
+      const client = await db.connect();
+      //run query
+      const query = 'SELECT * FROM users';
+      const result = await client.query(query);
+      //close connection
+      client.release();
+      //return result
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+      console.log('Error getting all users');
+      throw new Error(`Unable to get all users: ${(error as Error).message}`);
     }
   }
 }
