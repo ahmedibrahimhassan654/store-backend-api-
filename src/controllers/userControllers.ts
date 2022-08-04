@@ -12,6 +12,8 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
       message: 'User Created Successfully',
     });
   } catch (error) {
+    console.log('from usercontroller create user', error);
+
     next(error);
   }
 };

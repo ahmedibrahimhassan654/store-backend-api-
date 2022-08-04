@@ -1,6 +1,8 @@
 /* Replace with your SQL commands */
+
+CREATE Extension IF NOT EXISTS "uuid-ossp";
 CREATE TABLE users(
-    id SERIAL PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL UNIQUE,
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
