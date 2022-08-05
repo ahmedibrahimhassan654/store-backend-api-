@@ -27,7 +27,7 @@ class UserModel {
       //open connection to database
       const client = await db.connect();
       //run query
-      const query = 'SELECT * FROM users';
+      const query = 'SELECT id,email, first_name, last_name FROM users';
       const result = await client.query(query);
       //close connection
       client.release();
@@ -39,37 +39,50 @@ class UserModel {
       throw new Error(`Unable to get all users: ${(error as Error).message}`);
     }
   }
+
+  async getUser(id: string): Promise<User> {
+    try {
+      const client = await db.connect();
+      const query = 'SELECT * FROM users WHERE id = $1';
+      const result = await client.query(query, [id]);
+      client.release();
+      return result.rows[0];
+    } catch (error) {
+      console.log(error);
+      console.log('Error getting user');
+      throw new Error(`Unable to get user: ${(error as Error).message}`);
+    }
+  }
+
+  async updateUser(user: User): Promise<User> {
+    try {
+      const connection = await db.connect();
+      const sql = `UPDATE users 
+                  SET email=$1, first_name=$2, last_name=$3 
+                  WHERE id=$4 
+                  RETURNING *`;
+
+      const result = await connection.query(sql, [user.email, user.first_name, user.last_name, user.id]);
+      connection.release();
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Could not update user: ${user.first_name}, ${(error as Error).message}`);
+    }
+  }
+
+  async deleteUser(id: string): Promise<User> {
+    try {
+      const client = await db.connect();
+      const query = 'DELETE FROM users WHERE id = $1 RETURNING id,email, first_name, last_name';
+      const result = await client.query(query, [id]);
+      client.release();
+      return result.rows[0];
+    } catch (error) {
+      console.log(error);
+      console.log('Error deleting user');
+      throw new Error(`Unable to delete user: ${(error as Error).message}`);
+    }
+  }
 }
-//   async getUser(id: string): Promise<User> {
-//     const client = await db.connect();
-//     const query = 'SELECT * FROM users WHERE id = $1';
-//     const result = await client.query(query, [id]);
-//     client.release();
-//     return result.rows[0];
-//   }
-
-//   async getUsers(): Promise<User[]> {
-//     const client = await db.connect();
-//     const query = 'SELECT * FROM users';
-//     const result = await client.query(query);
-//     client.release();
-//     return result.rows;
-//   }
-
-//   async updateUser(user: User): Promise<User> {
-//     const client = await db.connect();
-//     const query = 'UPDATE users SET email = $1, first_name = $2, last_name = $3, password = $4 WHERE id = $5 RETURNING *';
-//     const result = await client.query(query, [user.email, user.first_name, user.last_name, user.password, user.id]);
-//     client.release();
-//     return result.rows[0];
-//   }
-
-//   async deleteUser(id: string): Promise<User> {
-//     const client = await db.connect();
-//     const query = 'DELETE FROM users WHERE id = $1 RETURNING *';
-//     const result = await client.query(query, [id]);
-//     client.release();
-//     return result.rows[0];
-//   }
 
 export default UserModel;
