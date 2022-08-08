@@ -13,6 +13,7 @@ const {
   DB_PASSWORD,
   BCRYPT_PASSWORD,
   SALT_ROUNDS,
+  TOKEN_SECRET,
 } = process.env;
 export default {
   port: PORT,
@@ -23,4 +24,5 @@ export default {
   password: DB_PASSWORD,
   pepper: BCRYPT_PASSWORD,
   saltRounds: SALT_ROUNDS,
+  tokenSecret: TOKEN_SECRET,
 };
