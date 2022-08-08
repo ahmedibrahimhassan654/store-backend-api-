@@ -1,5 +1,12 @@
 import db from '../DB';
 import User from '../dataTypes/userType';
+import config from '../middleware/config';
+import bcrypt from 'bcrypt';
+
+const hashPassword = (password: string) => {
+  const salt = parseInt(config.saltRounds as string, 10);
+  return bcrypt.hashSync(`${password}${config.pepper}`, salt);
+};
 
 class UserModel {
   //create new user
@@ -11,7 +18,12 @@ class UserModel {
       //run query
       const query =
         'INSERT INTO users (email, first_name, last_name, password) VALUES ($1, $2, $3, $4) RETURNING id,email, first_name, last_name';
-      const result = await client.query(query, [user.email, user.first_name, user.last_name, user.password]);
+      const result = await client.query(query, [
+        user.email,
+        user.first_name,
+        user.last_name,
+        hashPassword(user.password),
+      ]);
       //close connection
       client.release();
       //return result
