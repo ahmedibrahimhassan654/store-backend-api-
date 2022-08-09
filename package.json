@@ -10,7 +10,7 @@
     "prod": "npm run build && node dist/index.ts",
     "formate": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",
-    "test": "npm run build && jasmine"
+    "test": "set NODE_ENV=test&& db-migrate up && tsc && jasmine && db-migrate reset"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "jasmine": "^4.3.0",
     "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
