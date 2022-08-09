@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 import Error from '../utils/errorHandler';
 
 const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log('error stack', err);
+  // console.log('error stack', err);
   // if (error.routine === 'ExecConstraints') {
   //   const message = `Resource ${error.column}not found`;
   //   error = new Error(404, message);

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import UserModel from '../models/userModel';
 import jwt from 'jsonwebtoken';
 import config from '../middleware/config';
+import Error from '../utils/errorHandler';
 const userModel = new UserModel();
 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -37,6 +38,11 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userModel.getUser(req.params.id);
+    if (!user) {
+      const error: Error = new Error(`User with id ${req.params.id} not found`);
+      error.status = 404;
+      return next(error);
+    }
     res.json({
       status: 'success',
       data: { ...user },
@@ -54,7 +60,11 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
       throw new Error('you should send the user id in the request body to update the user');
     }
     const user = await userModel.updateUser(req.body);
-
+    if (!user) {
+      const error: Error = new Error(`User with id ${req.params.id} not found`);
+      error.status = 404;
+      return next(error);
+    }
     res.json({
       status: 'success',
       data: { ...user },
@@ -69,6 +79,11 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userModel.deleteUser(req.params.id);
+    if (!user) {
+      const error: Error = new Error(`User with id ${req.params.id} not found`);
+      error.status = 404;
+      return next(error);
+    }
     res.json({
       status: 'success',
       data: { ...user },
