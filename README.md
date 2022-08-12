@@ -57,6 +57,8 @@ TOKEN_SECRET=secret
 
 ## Endpoint
 
+## Create a new user
+
 ### `/api/users`
 
 Method: `Post`
@@ -69,9 +71,17 @@ body parameters:
 
 for example: `http://localhost:3000/api/users`
 
-![Postman res ](https://github.com/ahmedibrahimhassan654/image_processingAPI/blob/master/screens/postman%20res.PNG?raw=true)
+![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/create%20user.PNG?raw=true)
 
-![Browser res ](https://github.com/ahmedibrahimhassan654/image_processingAPI/blob/master/screens/rest-response%20in%20the%20browser.PNG?raw=true)
+## Get all users
+
+### `/api/users`
+
+Method: `get`
+
+for example: `http://localhost:3000/api/users`
+
+![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get all users.PNG?raw=true)
 
 #### Available Image options
 
