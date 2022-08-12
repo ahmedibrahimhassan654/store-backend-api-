@@ -81,7 +81,7 @@ Method: `get`
 
 for example: `http://localhost:3000/api/users`
 
-![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get all users.PNG?raw=true)
+![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get%20all%20users.PNG?raw=true)
 
 #### Available Image options
 
