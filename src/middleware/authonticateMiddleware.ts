@@ -2,17 +2,18 @@ import { Request, Response, NextFunction } from 'express';
 import config from '../middleware/config';
 import jwt from 'jsonwebtoken';
 import Error from '../utils/errorHandler';
-const handleUnauthorizedError = (next: NextFunction) => {
+import asyncHandler from 'express-async-handler';
+
+const handleUthontication = (next: NextFunction) => {
   const error: Error = new Error('Login Error: Please try again');
   error.status = 401;
   next(error);
 };
 
-const validateTokenMiddleware = (req: Request, _res: Response, next: NextFunction) => {
+const protect = asyncHandler(async (req: Request, _res: Response, next: NextFunction) => {
   try {
     // get authHeader
     const authHeader = req.get('Authorization');
-
     if (authHeader) {
       const bearer = authHeader.split(' ')[0].toLowerCase();
       const token = authHeader.split(' ')[1];
@@ -22,19 +23,19 @@ const validateTokenMiddleware = (req: Request, _res: Response, next: NextFunctio
           next();
         } else {
           // failed to authenticate user
-          handleUnauthorizedError(next);
+          handleUthontication(next);
         }
       } else {
         // token type not bearer
-        handleUnauthorizedError(next);
+        handleUthontication(next);
       }
     } else {
       // no token provided
-      handleUnauthorizedError(next);
+      handleUthontication(next);
     }
   } catch (error) {
-    handleUnauthorizedError(next);
+    handleUthontication(next);
   }
-};
+});
 
-export default validateTokenMiddleware;
+export default protect;
