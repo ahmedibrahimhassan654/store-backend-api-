@@ -20,39 +20,54 @@ The project can be built and run in the following ways
 
 `npm run prod`
 
-
 ### 4. development
 
 `npm run dev`
-
-
 
 ### 5. test
 
 `npm run tset`
 
-
-
 ### 6. Linting
 
 `npm run lint`
-
-![server test ](https://github.com/ahmedibrahimhassan654/image_processingAPI/blob/master/screens/lint.PNG?raw=true)
 
 ### 6. prettier format
 
 `npm run format`
 
-![server test ](https://github.com/ahmedibrahimhassan654/image_processingAPI/blob/master/screens/formate%20with%20prettier.PNG?raw=true)
+# .env file
+
+PORT=3000
+
+NODE_ENV=dev
+
+# database connection informations
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME_DEV=store_dev
+DB_NAME_TEST=store_test
+DB_NAME_PROD=store_prod
+DB_USER=postgres
+DB_PASSWORD=Allahonly1
+BCRYPT_PASSWORD=Allahonly1
+SALT_ROUNDS=10
+TOKEN_SECRET=secret
 
 ## Endpoint
 
-### `/api/images/resize?filename=<filename>&width=<width>&height=<height>`
+### `/api/users`
 
-Method: `get`
-URL Params: `height` and `width` - the height or width of the image in pixels
-Query Param: `filename` - the specific image you are requesting.
-for example: `http://localhost:3000/api/images/resize?filename=palmtunnel&width=80&height=80`
+Method: `Post`
+
+body parameters:
+"email":"test3534email.gmail.com",
+"first_name":"test3534",
+"last_name":"test334",
+"password":"Allahonly1"
+
+for example: `http://localhost:3000/api/users`
 
 ![Postman res ](https://github.com/ahmedibrahimhassan654/image_processingAPI/blob/master/screens/postman%20res.PNG?raw=true)
 
