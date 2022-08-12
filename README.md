@@ -57,6 +57,10 @@ NODE_ENV=dev
 
 ## Endpoint
 
+all api endpoints are listed on this link
+
+- [Postman ](https://documenter.postman.com/preview/7173620-3569b4ba-b4fa-42d3-bc58-826083cc6e28?environment=&versionTag=latest&apiName=CURRENT&version=latest&documentationLayout=classic-double-column&right-sidebar=303030&top-bar=FFFFFF&highlight=EF5B25#8370898c-2f3d-4288-839b-60ce3da827f5) - End point docmentation .
+
 ## Create a new user
 
 ### `/api/users`
@@ -80,6 +84,26 @@ for example: `http://localhost:3000/api/users`
 Method: `get`
 
 for example: `http://localhost:3000/api/users`
+
+![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get%20all%20users.PNG?raw=true)
+
+## Get single user
+
+### `/api/users`
+
+Method: `get`
+
+for example: `http://localhost:3000/api/71420891-c652-415b-9c6c-437153275c88`
+
+![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get%20all%20users.PNG?raw=true)
+
+## Delete single user
+
+### `/api/users`
+
+Method: `Delete`
+
+for example: `http://localhost:3000/api/71420891-c652-415b-9c6c-437153275c88`
 
 ![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get%20all%20users.PNG?raw=true)
 
