@@ -83,27 +83,12 @@ for example: `http://localhost:3000/api/users`
 
 ![Postman res ](https://github.com/ahmedibrahimhassan654/store-backend-api-/blob/master/screens/get%20all%20users.PNG?raw=true)
 
-#### Available Image options
-
-1. `encenadaport`
-2. `fjord`
-3. `icelandwaterfall`
-4. `palmtunnel`
-5. `santamonica`
-
-### Functionality
-
-- User can query endpoint using various params and queries to retrieve an image with a specified height and width.
-- If the image is not found, a 404 error is returned.
-- All images requested will be saved to disk.
-- There is a cache layer. If a user requests an image size that has already been requested, there is no need for resizing and the previously resized image will be returned.
-
 ## Built With
 
 - [NodeJS](https://nodejs.org/en/) - The JavaScript runtime.
 - [Express](https://expressjs.com/) - The web framework.
 - [TypeScript](https://www.typescriptlang.org/) - The language used.
-- [Sharp](https://sharp.pixelplumbing.com/) - NodeJS image processor.
+- [postgree SQL DB](https://www.postgresql.org/) - potgree DB.
 - [Postman](https://www.getpostman.com/) - The REST API tool.
 - [Prettier](https://prettier.io/) - The code formatter.
 - [eslint](https://eslint.org/) - Find and fix problems in code.
