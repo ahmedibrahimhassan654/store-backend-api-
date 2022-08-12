@@ -44,16 +44,16 @@ NODE_ENV=dev
 
 # database connection informations
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME_DEV=store_dev
-DB_NAME_TEST=store_test
-DB_NAME_PROD=store_prod
-DB_USER=postgres
-DB_PASSWORD=Allahonly1
-BCRYPT_PASSWORD=Allahonly1
-SALT_ROUNDS=10
-TOKEN_SECRET=secret
+- DB_HOST=localhost
+- DB_PORT=5432
+- DB_NAME_DEV=store_dev
+- DB_NAME_TEST=store_test
+- DB_NAME_PROD=store_prod
+- DB_USER=postgres
+- DB_PASSWORD=Allahonly1
+- BCRYPT_PASSWORD=Allahonly1
+- SALT_ROUNDS=10
+- TOKEN_SECRET=secret
 
 ## Endpoint
 
