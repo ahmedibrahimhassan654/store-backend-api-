@@ -7,7 +7,7 @@
     "dev": "nodemon src/index.ts",
     "migration:run": "db-migrate up",
     "build": "tsc",
-    "prod": "npm run build && node dist/index.ts",
+    "prod": "set NODE_ENV=prod && npm run build && node ./dist/index.js",
     "formate": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "test": "set NODE_ENV=test&& db-migrate up && tsc && jasmine && db-migrate reset"

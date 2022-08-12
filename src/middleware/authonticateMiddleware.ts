@@ -13,7 +13,6 @@ const validateTokenMiddleware = (req: Request, _res: Response, next: NextFunctio
     // get authHeader
     const authHeader = req.get('Authorization');
 
-
     if (authHeader) {
       const bearer = authHeader.split(' ')[0].toLowerCase();
       const token = authHeader.split(' ')[1];
